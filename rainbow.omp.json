@@ -1,0 +1,181 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#003543",
+          "foreground": "#00c983",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": "{{ .Icon }} {{ .HostName }} ",
+          "type": "os"
+        },
+        {
+          "background": "#DA627D",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "style": "folder"
+          },
+          "style": "powerline",
+          "template": " \uf07b  {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "#FCA17D",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FCA17D{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FF{{ end }}"
+          ],
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "#FEC37D",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "powerline",
+          "template": " \ufbab {{ .FormattedMs }} ",
+          "type": "executiontime"
+        },
+        {
+          "background": "#71a737",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#f1184c{{ end }}"
+          ],
+          "foreground": "#ffffff",
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " \ue23a {{ if gt .Code 0 }}\uf00d {{ .Meaning }}{{ else }}\uf42e{{ end }} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "exit"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "#53989f",
+          "foreground": "#ffffff",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": " \uf489 {{ .Name }} ",
+          "type": "shell"
+        },
+        {
+            "background": "#4d7fc0",
+            "foreground": "#ffffff",
+            "invert_powerline": true,
+            "powerline_symbol": "\ue0b2",
+            "style": "powerline",
+            "template": " \uf85a {{ round .PhysicalPercentUsed .Precision }}% ",
+            "type": "sysinfo"
+        },
+        {
+            "background": "#9673c7",
+            "foreground": "#ffffff",
+            "invert_powerline": true,
+            "powerline_symbol": "\ue0b2",
+            "style": "powerline",
+            "template": " \ufb19 {{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1000000000.0) }}/{{ (div .PhysicalTotalMemory 1000000000.0) }}GB ",
+            "type": "sysinfo"
+        },
+        {
+          "background": "#bf7aba",
+          "background_templates": [
+            "{{if eq \"Charging\" .State.String}}#478058{{end}}",
+            "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}",
+            "{{if eq \"Full\" .State.String}}#bf7aba{{end}}"
+          ],
+          "foreground": "#ffffff",
+          "invert_powerline": true,
+          "powerline_symbol": "\ue0b2",
+          "properties": {
+            "charged_icon": "\ue22f ",
+            "charging_icon": "\uf583 ",
+            "discharging_icon": "\uf582 "
+          },
+          "style": "powerline",
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% ",
+          "type": "battery"
+        },
+        {
+          "background": "#c793bb",
+          "foreground": "#ffffff",
+          "invert_powerline": true,
+          "style": "diamond",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "background": "#ebcc34",
+          "foreground": "#000000",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": " \ufd31 Kubernetes {{.Context}} cluster {{if .Namespace}}- {{.Namespace}} namespace{{end}} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "kubectl"
+        },
+        {
+          "background": "#9ec3f0",
+          "foreground": "#000000",
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " \ufd03 Subscription {{ .Name }} ({{ if .EnvironmentName | contains \"AzureCloud\" }}{{ \"Global\" }}{{ else }}{{ .EnvironmentName }}{{ end }}) ",
+          "type": "az"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+            "foreground": "#cd5e42",
+            "style": "plain",
+            "template": "\ue3bf ",
+            "type": "root"
+          },
+          {
+            "foreground": "#CD4277",
+            "style": "plain",
+            "template": " <#45F1C2><b>\u26a1</b></><b>{{ .UserName }}</b> <#26C6DA>\u276f</><#45F1C2>\u276f</>",
+            "type": "text"
+          }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "final_space": true,
+  "version": 2
+}
