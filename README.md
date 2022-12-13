@@ -8,4 +8,4 @@
 
 ## Install
 
-Install and use [Nerd Fonts](https://www.nerdfonts.com/) in terminal. Copy [`rainbow.omp.json`](./rainbow.omp.json) to Oh My Posh theme folder and [change theme]([Customize | Oh My Posh](https://ohmyposh.dev/docs/installation/customize)). 
+Install and use [Nerd Fonts](https://www.nerdfonts.com/) in terminal. Copy [`rainbow.omp.json`](./rainbow.omp.json) to Oh My Posh theme folder and [change theme](https://ohmyposh.dev/docs/installation/customize). 
